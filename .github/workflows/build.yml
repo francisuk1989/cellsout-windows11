@@ -14,7 +14,7 @@ jobs:
     env:
       Configuration: Release
       Platform: x64
-      Project_Path: NetworkEngineerApp/NetworkEngineerApp.csproj 
+      Project_Path: NetworkEngineerApp.csproj 
 
     steps:
     - name: Checkout Source Code
