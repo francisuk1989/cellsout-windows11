@@ -1,0 +1,216 @@
+<Window
+    x:Class="NetworkEngineerApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="CELLSOUT // FIELD ENGINE">
+
+    <Grid Background="#050508">
+        <TabView IsAddTabButtonVisible="False" CloseButtonOverlayMode="Never">
+            
+            <!-- TAB 1: CELL MATRIX -->
+            <TabViewItem Header="CELL MATRIX" IsSelected="True">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24,16">
+                    <StackPanel Spacing="12" MaxWidth="800" HorizontalAlignment="Left">
+                        
+                        <!-- Operator Info Card -->
+                        <Border Background="#0A0A10" BorderBrush="#00F0FF" BorderThickness="1" Padding="16" CornerRadius="6">
+                            <Grid>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock x:Name="TxtNetworkName" Text="SCANNING..." FontSize="18" FontWeight="Bold" Foreground="#FFFFFF"/>
+                                    <TextBlock x:Name="TxtSiteLabel" Text="Site: INITIALIZING..." FontSize="13" Foreground="#00FF66" FontWeight="Bold" Margin="0,4,0,0"/>
+                                </StackPanel>
+                                <TextBlock x:Name="TxtMccMnc" Text="[000 00]" FontSize="16" FontFamily="Consolas" Foreground="#00F0FF" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Baseband IDs Card -->
+                        <Border Background="#0A0A10" BorderBrush="#1A1A26" BorderThickness="1" Padding="16" CornerRadius="6">
+                            <Grid RowSpacing="12" ColumnSpacing="24">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <StackPanel Grid.Row="0" Grid.Column="0">
+                                    <TextBlock Text="eNodeB ID:" FontSize="11" Foreground="#666688" FontWeight="Bold"/>
+                                    <TextBlock x:Name="TxtEnb" Text="0000" FontSize="26" FontWeight="Bold" Foreground="#00FF66"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="0" Grid.Column="1">
+                                    <TextBlock Text="SECTOR:" FontSize="11" Foreground="#666688" FontWeight="Bold"/>
+                                    <TextBlock x:Name="TxtSector" Text="|00|" FontSize="26" FontWeight="Bold" Foreground="#A000FF"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Grid.Column="0">
+                                    <TextBlock Text="CELL ID (ECI)" FontSize="10" Foreground="#444455"/>
+                                    <TextBlock x:Name="TxtCellId" Text="0" FontSize="14" FontFamily="Consolas" Foreground="#FFFFFF"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Grid.Column="1">
+                                    <TextBlock Text="TAC (AREA)" FontSize="10" Foreground="#444455"/>
+                                    <TextBlock x:Name="TxtTac" Text="0" FontSize="14" FontFamily="Consolas" Foreground="#FFFFFF"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- Transmission Controls -->
+                        <Border Background="#0A0A10" BorderBrush="#1A1A26" BorderThickness="1" Padding="16" CornerRadius="6">
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="📡 TRANSMISSION &amp; SESSION CONTROL" FontSize="11" Foreground="#FFCC00" FontWeight="Bold" CharacterSpacing="2"/>
+                                
+                                <Grid>
+                                    <TextBlock Text="Restrict Uploads to Wi-Fi" VerticalAlignment="Center" FontSize="13" Foreground="#FFFFFF"/>
+                                    <ToggleSwitch x:Name="TglWifiOnly" IsOn="True" HorizontalAlignment="Right" OnContent="ON" OffContent="OFF" Foreground="#00F0FF" VerticalAlignment="Center"/>
+                                </Grid>
+                                
+                                <Grid>
+                                    <TextBlock Text="Log Telemetry Session" VerticalAlignment="Center" FontSize="13" Foreground="#FFFFFF"/>
+                                    <ToggleSwitch x:Name="TglWriteCsv" IsOn="True" HorizontalAlignment="Right" OnContent="ON" OffContent="OFF" Foreground="#00FF66" VerticalAlignment="Center" Toggled="TglWriteCsv_Toggled"/>
+                                </Grid>
+                                
+                                <StackPanel Spacing="6" Margin="0,8,0,0">
+                                    <Grid>
+                                        <TextBlock Text="BACKHAUL LINK STATUS:" FontSize="10" Foreground="#555566" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="TxtTxStatus" Text="IDLE // STANDBY" FontSize="12" FontFamily="Consolas" Foreground="#00FF66" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                    <Grid>
+                                        <TextBlock Text="OFFLINE RECORD QUEUE:" FontSize="10" Foreground="#555566" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="TxtQueueStatus" Text="0 PENDING UPLOADS" FontSize="12" FontFamily="Consolas" Foreground="#00F0FF" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                    <Grid>
+                                        <TextBlock Text="ACTIVE SESSION LOGFILE:" FontSize="10" Foreground="#555566" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="TxtStorageStatus" Text="DISK DISENGAGED" FontSize="11" FontFamily="Consolas" Foreground="#00FF66" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Signal Matrices -->
+                        <Border Background="#0A0A10" BorderBrush="#1A1A26" BorderThickness="1" Padding="16" CornerRadius="6">
+                            <Grid RowSpacing="12">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <StackPanel Grid.Row="0" Grid.Column="0">
+                                    <TextBlock Text="RSRP" FontSize="10" Foreground="#555566"/>
+                                    <TextBlock x:Name="TxtRsrp" Text="---" FontSize="13" FontWeight="Bold" Foreground="#00FF66"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="0" Grid.Column="1">
+                                    <TextBlock Text="RSRQ" FontSize="10" Foreground="#555566"/>
+                                    <TextBlock x:Name="TxtRsrq" Text="---" FontSize="13" FontWeight="Bold" Foreground="#FFCC00"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="0" Grid.Column="2">
+                                    <TextBlock Text="RSSI" FontSize="10" Foreground="#555566"/>
+                                    <TextBlock x:Name="TxtRssi" Text="---" FontSize="13" FontWeight="Bold" Foreground="#00FF66"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="0" Grid.Column="3">
+                                    <TextBlock Text="SINR" FontSize="10" Foreground="#555566"/>
+                                    <TextBlock x:Name="TxtSinr" Text="---" FontSize="13" FontWeight="Bold" Foreground="#00F0FF"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1" Grid.Column="0">
+                                    <TextBlock Text="PCI" FontSize="10" Foreground="#555566"/>
+                                    <TextBlock x:Name="TxtPci" Text="0" FontSize="13" Foreground="#FFFFFF"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Grid.Column="1">
+                                    <TextBlock Text="EARFCN" FontSize="10" Foreground="#555566"/>
+                                    <TextBlock x:Name="TxtEarfcn" Text="0" FontSize="13" Foreground="#FFFFFF"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Grid.Column="2">
+                                    <TextBlock Text="CQI" FontSize="10" Foreground="#555566"/>
+                                    <TextBlock x:Name="TxtCqi" Text="0" FontSize="13" Foreground="#00F0FF"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Grid.Column="3">
+                                    <TextBlock Text="TA" FontSize="10" Foreground="#555566"/>
+                                    <TextBlock x:Name="TxtTa" Text="00" FontSize="13" FontWeight="Bold" Foreground="#FF5500"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- Spatial Footer -->
+                        <Grid Padding="4,8">
+                            <StackPanel HorizontalAlignment="Left">
+                                <TextBlock x:Name="TxtLat" Text="LAT ▶ 0.00000" FontSize="12" FontFamily="Consolas" Foreground="#888888"/>
+                                <TextBlock x:Name="TxtLon" Text="LON ▶ 0.00000" FontSize="12" FontFamily="Consolas" Foreground="#888888"/>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <TextBlock x:Name="TxtSpeed" Text="SPEED ▶ 0.0 MPH" FontSize="12" FontFamily="Consolas" Foreground="#00F0FF" HorizontalAlignment="Right"/>
+                                <TextBlock x:Name="TxtIntervalRate" Text="RATE ▶ STATIC // 15S" FontSize="11" FontFamily="Consolas" Foreground="#FFFFFF" Opacity="0.6" HorizontalAlignment="Right"/>
+                            </StackPanel>
+                        </Grid>
+                        
+                    </StackPanel>
+                </ScrollViewer>
+            </TabViewItem>
+
+            <!-- TAB 2: SYSTEM INFO -->
+            <TabViewItem Header="DESKTOP ENVIRONMENT">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24,16">
+                    <StackPanel Spacing="12" MaxWidth="800" HorizontalAlignment="Left">
+                        
+                        <Border Background="#0A0A10" BorderBrush="#1A1A26" BorderThickness="1" Padding="16" CornerRadius="6">
+                            <StackPanel Spacing="6">
+                                <TextBlock Text="💻 DESKTOP HARDWARE ARCHITECTURE" FontSize="11" Foreground="#FF007F" FontWeight="Bold" CharacterSpacing="2"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="SYSTEM ARCHITECTURE" FontSize="10" Foreground="#555566"/>
+                                        <TextBlock x:Name="TxtDeviceModel" Text="Windows x64 Workstation" FontSize="14" FontWeight="Bold" Foreground="#FFFFFF"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Text="PROCESSOR IDENTIFIER" FontSize="10" Foreground="#555566"/>
+                                        <TextBlock x:Name="TxtProcessor" Text="Detecting CPU..." FontSize="13" FontWeight="Bold" Foreground="#FFFFFF"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Background="#0A0A10" BorderBrush="#1A1A26" BorderThickness="1" Padding="16" CornerRadius="6">
+                            <StackPanel Spacing="6">
+                                <TextBlock Text="❖ WINDOWS OS FORENSICS" FontSize="11" Foreground="#FF007F" FontWeight="Bold" CharacterSpacing="2"/>
+                                <TextBlock x:Name="TxtOsBranch" Text="BRANCH  ▶ Windows 11 Desktop" FontSize="12" FontFamily="Consolas" Foreground="#FFFFFF"/>
+                                <TextBlock x:Name="TxtOsBuild" Text="OS BUILD ▶ 10.0.xxxxx" FontSize="12" FontFamily="Consolas" Foreground="#AAAAAA"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Background="#0A0A10" BorderBrush="#1A1A26" BorderThickness="1" Padding="16" CornerRadius="6">
+                            <StackPanel Spacing="6">
+                                <TextBlock Text="🔋 POWER MANAGEMENT REGISTRY" FontSize="11" Foreground="#FF007F" FontWeight="Bold" CharacterSpacing="2"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="BATTERY MAIN FUEL LEVEL" FontSize="10" Foreground="#555566"/>
+                                        <TextBlock x:Name="TxtBattery" Text="---" FontSize="14" FontWeight="Bold" Foreground="#FFFFFF"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Text="CHARGE STATE" FontSize="10" Foreground="#555566"/>
+                                        <TextBlock x:Name="TxtBatteryStatus" Text="---" FontSize="14" FontWeight="Bold" Foreground="#00FF66"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabViewItem>
+
+        </TabView>
+    </Grid>
+</Window>
