@@ -5,12 +5,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="CELLSOUT">
+    Title="CELLSOUT // FIELD ENGINE">
 
     <Grid Background="#050508">
         <TabView IsAddTabButtonVisible="False">
             
-            <TabViewItem Header="CELL" IsSelected="True" IsCloseButtonVisible="False">
+            <TabViewItem Header="CELL MATRIX" IsSelected="True" IsCloseButtonVisible="False">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24,16">
                     <StackPanel Spacing="12" MaxWidth="800" HorizontalAlignment="Left">
                         
@@ -36,19 +36,19 @@
                                 </Grid.ColumnDefinitions>
                                 
                                 <StackPanel Grid.Row="0" Grid.Column="0">
-                                    <TextBlock Text="eNb:" FontSize="11" Foreground="#666688" FontWeight="Bold"/>
+                                    <TextBlock Text="eNodeB ID:" FontSize="11" Foreground="#666688" FontWeight="Bold"/>
                                     <TextBlock x:Name="TxtEnb" Text="0000" FontSize="26" FontWeight="Bold" Foreground="#00FF66"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="0" Grid.Column="1">
-                                    <TextBlock Text="CID" FontSize="11" Foreground="#666688" FontWeight="Bold"/>
+                                    <TextBlock Text="SECTOR:" FontSize="11" Foreground="#666688" FontWeight="Bold"/>
                                     <TextBlock x:Name="TxtSector" Text="|00|" FontSize="26" FontWeight="Bold" Foreground="#A000FF"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="1" Grid.Column="0">
-                                    <TextBlock Text="ECI" FontSize="10" Foreground="#444455"/>
+                                    <TextBlock Text="CELL ID (ECI)" FontSize="10" Foreground="#444455"/>
                                     <TextBlock x:Name="TxtCellId" Text="0" FontSize="14" FontFamily="Consolas" Foreground="#FFFFFF"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="1" Grid.Column="1">
-                                    <TextBlock Text="TAC" FontSize="10" Foreground="#444455"/>
+                                    <TextBlock Text="TAC (AREA)" FontSize="10" Foreground="#444455"/>
                                     <TextBlock x:Name="TxtTac" Text="0" FontSize="14" FontFamily="Consolas" Foreground="#FFFFFF"/>
                                 </StackPanel>
                             </Grid>
@@ -141,6 +141,7 @@
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
                                 <TextBlock x:Name="TxtSpeed" Text="SPEED ▶ 0.0 MPH" FontSize="12" FontFamily="Consolas" Foreground="#00F0FF" HorizontalAlignment="Right"/>
+                                <TextBlock x:Name="TxtIntervalRate" Text="RATE ▶ STATIC // 15S" FontSize="11" FontFamily="Consolas" Foreground="#FFFFFF" Opacity="0.6" HorizontalAlignment="Right"/>
                             </StackPanel>
                         </Grid>
                         
