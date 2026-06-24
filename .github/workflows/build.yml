@@ -9,12 +9,11 @@ on:
 jobs:
   build:
     name: Compile & Publish WinUI 3 (x64)
-    runs-on: windows-latest
+    runs-on: windows-2025-vs2026
 
     env:
       Configuration: Release
       Platform: x64
-      # CHANGE THIS to match your actual .csproj file filename
       Project_Path: NetworkEngineerApp/NetworkEngineerApp.csproj 
 
     steps:
