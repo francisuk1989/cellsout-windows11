@@ -5,17 +5,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="CELLSOUT // FIELD ENGINE">
+    Title="CELLSOUT">
 
     <Grid Background="#050508">
-        <TabView IsAddTabButtonVisible="False" CloseButtonOverlayMode="Never">
+        <TabView IsAddTabButtonVisible="False">
             
-            <!-- TAB 1: CELL MATRIX -->
-            <TabViewItem Header="CELL MATRIX" IsSelected="True">
+            <TabViewItem Header="CELL" IsSelected="True" IsCloseButtonVisible="False">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24,16">
                     <StackPanel Spacing="12" MaxWidth="800" HorizontalAlignment="Left">
                         
-                        <!-- Operator Info Card -->
                         <Border Background="#0A0A10" BorderBrush="#00F0FF" BorderThickness="1" Padding="16" CornerRadius="6">
                             <Grid>
                                 <StackPanel VerticalAlignment="Center">
@@ -26,7 +24,6 @@
                             </Grid>
                         </Border>
 
-                        <!-- Baseband IDs Card -->
                         <Border Background="#0A0A10" BorderBrush="#1A1A26" BorderThickness="1" Padding="16" CornerRadius="6">
                             <Grid RowSpacing="12" ColumnSpacing="24">
                                 <Grid.RowDefinitions>
@@ -39,25 +36,24 @@
                                 </Grid.ColumnDefinitions>
                                 
                                 <StackPanel Grid.Row="0" Grid.Column="0">
-                                    <TextBlock Text="eNodeB ID:" FontSize="11" Foreground="#666688" FontWeight="Bold"/>
+                                    <TextBlock Text="eNb:" FontSize="11" Foreground="#666688" FontWeight="Bold"/>
                                     <TextBlock x:Name="TxtEnb" Text="0000" FontSize="26" FontWeight="Bold" Foreground="#00FF66"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="0" Grid.Column="1">
-                                    <TextBlock Text="SECTOR:" FontSize="11" Foreground="#666688" FontWeight="Bold"/>
+                                    <TextBlock Text="CID" FontSize="11" Foreground="#666688" FontWeight="Bold"/>
                                     <TextBlock x:Name="TxtSector" Text="|00|" FontSize="26" FontWeight="Bold" Foreground="#A000FF"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="1" Grid.Column="0">
-                                    <TextBlock Text="CELL ID (ECI)" FontSize="10" Foreground="#444455"/>
+                                    <TextBlock Text="ECI" FontSize="10" Foreground="#444455"/>
                                     <TextBlock x:Name="TxtCellId" Text="0" FontSize="14" FontFamily="Consolas" Foreground="#FFFFFF"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="1" Grid.Column="1">
-                                    <TextBlock Text="TAC (AREA)" FontSize="10" Foreground="#444455"/>
+                                    <TextBlock Text="TAC" FontSize="10" Foreground="#444455"/>
                                     <TextBlock x:Name="TxtTac" Text="0" FontSize="14" FontFamily="Consolas" Foreground="#FFFFFF"/>
                                 </StackPanel>
                             </Grid>
                         </Border>
 
-                        <!-- Transmission Controls -->
                         <Border Background="#0A0A10" BorderBrush="#1A1A26" BorderThickness="1" Padding="16" CornerRadius="6">
                             <StackPanel Spacing="10">
                                 <TextBlock Text="📡 TRANSMISSION &amp; SESSION CONTROL" FontSize="11" Foreground="#FFCC00" FontWeight="Bold" CharacterSpacing="2"/>
@@ -89,18 +85,17 @@
                             </StackPanel>
                         </Border>
 
-                        <!-- Signal Matrices -->
                         <Border Background="#0A0A10" BorderBrush="#1A1A26" BorderThickness="1" Padding="16" CornerRadius="6">
                             <Grid RowSpacing="12">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
+                                    <Grid.RowDefinition Height="Auto"/>
+                                    <Grid.RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <Grid.ColumnDefinition Width="*"/>
+                                    <Grid.ColumnDefinition Width="*"/>
+                                    <Grid.ColumnDefinition Width="*"/>
+                                    <Grid.ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 
                                 <StackPanel Grid.Row="0" Grid.Column="0">
@@ -139,7 +134,6 @@
                             </Grid>
                         </Border>
 
-                        <!-- Spatial Footer -->
                         <Grid Padding="4,8">
                             <StackPanel HorizontalAlignment="Left">
                                 <TextBlock x:Name="TxtLat" Text="LAT ▶ 0.00000" FontSize="12" FontFamily="Consolas" Foreground="#888888"/>
@@ -147,7 +141,6 @@
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
                                 <TextBlock x:Name="TxtSpeed" Text="SPEED ▶ 0.0 MPH" FontSize="12" FontFamily="Consolas" Foreground="#00F0FF" HorizontalAlignment="Right"/>
-                                <TextBlock x:Name="TxtIntervalRate" Text="RATE ▶ STATIC // 15S" FontSize="11" FontFamily="Consolas" Foreground="#FFFFFF" Opacity="0.6" HorizontalAlignment="Right"/>
                             </StackPanel>
                         </Grid>
                         
@@ -155,8 +148,7 @@
                 </ScrollViewer>
             </TabViewItem>
 
-            <!-- TAB 2: SYSTEM INFO -->
-            <TabViewItem Header="DESKTOP ENVIRONMENT">
+            <TabViewItem Header="DESKTOP ENVIRONMENT" IsCloseButtonVisible="False">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24,16">
                     <StackPanel Spacing="12" MaxWidth="800" HorizontalAlignment="Left">
                         
@@ -193,8 +185,8 @@
                                 <TextBlock Text="🔋 POWER MANAGEMENT REGISTRY" FontSize="11" Foreground="#FF007F" FontWeight="Bold" CharacterSpacing="2"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="2*"/>
+                                        <Grid.ColumnDefinition Width="3*"/>
+                                        <Grid.ColumnDefinition Width="2*"/>
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Grid.Column="0">
                                         <TextBlock Text="BATTERY MAIN FUEL LEVEL" FontSize="10" Foreground="#555566"/>
