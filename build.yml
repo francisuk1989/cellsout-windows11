@@ -1,0 +1,55 @@
+name: Build and Package Windows 11 x64 App
+
+on:
+  push:
+    branches: [ "main", "developer" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Compile & Publish WinUI 3 (x64)
+    runs-on: windows-latest
+
+    env:
+      Configuration: Release
+      Platform: x64
+      # CHANGE THIS to match your actual .csproj file filename
+      Project_Path: NetworkEngineerApp/NetworkEngineerApp.csproj 
+
+    steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Setup MSBuild Engine
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Restore NuGet Dependencies
+      run: dotnet restore ${{ env.Project_Path }} --runtime win-${{ env.Platform }}
+
+    # COMPILATION: Builds a standalone, high-performance, unpackaged x64 binary suite
+    - name: Publish WinUI 3 Unpackaged Desktop App
+      run: |
+        dotnet publish ${{ env.Project_Path }} `
+          -c ${{ env.Configuration }} `
+          -r win-${{ env.Platform }} `
+          --self-contained true `
+          /p:PublishReadyToRun=true `
+          /p:WindowsAppSDKSelfContained=true `
+          /p:PublishSingleFile=false
+
+    # ARTIFACT DELIVERY: Compresses the compiled deployment frame for distribution
+    - name: Upload Live x64 Production Build
+      uses: actions/upload-artifact@v4
+      with:
+        name: CellScout-FieldEngine-Win11-x64
+        path: |
+          **/bin/${{ env.Platform }}/${{ env.Configuration }}/**/publish/
+        if-no-files-found: error
